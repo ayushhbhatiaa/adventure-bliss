@@ -1,0 +1,31 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a routerLink="/">
+          <img [src]="companyInfo.logoPath" [alt]="companyInfo.name" class="logo rounded-circle">
+        </a>
+      </div>
+      
+      <div class="nav-menu" [class.active]="isMenuOpen">
+        <a *ngFor="let link of navigationLinks" 
+           [routerLink]="link.route" 
+           class="nav-link" 
+           [class.contact-btn]="link.isContactButton"
+           (click)="closeMenu()">{{ link.label }}</a>
+        
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-nav" (click)="toggleTheme()" [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+          <span class="toggle-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+          <!-- <span class="toggle-text">{{ isDarkMode ? 'Light' : 'Dark' }}</span> -->
+        </button>
+      </div>
+      
+      <div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+</header>
