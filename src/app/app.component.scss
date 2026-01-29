@@ -1,0 +1,40 @@
+// App Component Styles
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
+
+// Global app styles
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+// Router outlet wrapper
+router-outlet {
+  display: block;
+  flex: 1;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0;
+  }
+}
+
+// Adventure theme colors (can be customized)
+:root {
+  --primary-color: #2c5aa0;
+  --secondary-color: #f4a261;
+  --accent-color: #e76f51;
+  --text-color: #264653;
+  --background-color: #f8f9fa;
+}

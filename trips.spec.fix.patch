@@ -1,0 +1,19 @@
+diff --git a/src/app/components/trips/trips.spec.ts b/src/app/components/trips/trips.spec.ts
+--- a/src/app/components/trips/trips.spec.ts
++++ b/src/app/components/trips/trips.spec.ts
+@@
+ describe('TripsComponent', () => {
+-  let c
++  let component: TripsComponent;
++  let fixture: ComponentFixture<TripsComponent>;
+@@
+   beforeEach(async () => {
+     await TestBed.configureTestingModule({
+       imports: [TripsComponent, RouterTestingModule]
+     })
+     .compileComponents();
+@@
+   it('should create', () => {
+     expect(component).toBeTruthy();
+   });
+ });

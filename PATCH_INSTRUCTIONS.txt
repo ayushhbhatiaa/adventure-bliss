@@ -1,0 +1,24 @@
+Steps to apply the patch and push (run these locally in your project shell):
+
+1) Ensure Git is installed and configured:
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+
+2) Initialize repo (if you need to):
+   cd /c/ayush/myFrontendProjects/adventure-yaarana
+   git init
+   git checkout -b main
+
+3) Apply the patch:
+   git apply trips.spec.fix.patch
+
+4) Verify the file changed as expected:
+   git diff -- src/app/components/trips/trips.spec.ts
+
+5) Commit and push:
+   git add src/app/components/trips/trips.spec.ts
+   git commit -m "test: fix TripsComponent spec declarations"
+   git remote add origin <REMOTE_URL>   # only if remote not set
+   git push -u origin main
+
+If you want, I can also create a small batch script that runs these commands for you (Windows), but you must run it locally since git is not available in this environment.

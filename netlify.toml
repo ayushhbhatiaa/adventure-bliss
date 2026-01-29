@@ -1,0 +1,6 @@
+[build]
+  command = "npx ng build --configuration production"
+  publish = "dist/adventure-bliss/browser"
+
+[context.production.environment]
+  NODE_VERSION = "22.11.0"

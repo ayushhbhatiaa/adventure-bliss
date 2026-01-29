@@ -1,0 +1,101 @@
+<div class="adventure-vault">
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+      <h1>{{ pageInfo.title }}</h1>
+      <p class="hero-subtitle">{{ pageInfo.subtitle }}</p>
+      <p class="hero-description">{{ pageInfo.description }}</p>
+    </div>
+  </section>
+
+  <!-- Category Filter Section -->
+  <section class="filter-section">
+    <div class="container">
+      <h2 class="section-title">Explore by Category</h2>
+      <div class="category-filters">
+        <button 
+          *ngFor="let category of categories" 
+          class="category-btn"
+          [class.active]="selectedCategory === category.id"
+          (click)="selectCategory(category.id)">
+          <span class="category-icon">{{ category.icon }}</span>
+          <span class="category-name">{{ category.name }}</span>
+        </button>
+      </div>
+      
+      <div class="category-info">
+        <h3>
+          <span class="info-icon">{{ currentCategoryInfo.icon }}</span>
+          {{ currentCategoryInfo.name }}
+        </h3>
+        <p class="photo-count">{{ filteredPhotos.length }} {{ filteredPhotos.length === 1 ? 'photo' : 'photos' }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Grid -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="photo-grid">
+        <div 
+          *ngFor="let photo of filteredPhotos; trackBy: trackByPhotoId" 
+          class="photo-card"
+          (click)="openPhotoModal(photo)">
+          <div class="photo-container">
+            <img [src]="photo.src" [alt]="photo.title" class="photo-image" loading="lazy">
+            <div class="photo-overlay">
+              <div class="photo-info">
+                <h4 class="photo-title">{{ photo.title }}</h4>
+                <p class="photo-location">📍 {{ photo.location }}</p>
+                <div class="photo-tags">
+                  <span *ngFor="let tag of photo.tags.slice(0, 2)" class="tag">#{{ tag }}</span>
+                </div>
+              </div>
+              <div class="photo-date">{{ formatDate(photo.date) }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div *ngIf="filteredPhotos.length === 0" class="empty-state">
+        <div class="empty-icon">📸</div>
+        <h3>No photos found</h3>
+        <p>Try selecting a different category to explore more adventures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Modal -->
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closePhotoModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="selectedPhoto">
+      <button class="modal-close" (click)="closePhotoModal()" aria-label="Close modal">×</button>
+      
+      <!-- Navigation Arrows -->
+      <button class="modal-nav prev" (click)="navigatePhoto('prev')" aria-label="Previous photo">‹</button>
+      <button class="modal-nav next" (click)="navigatePhoto('next')" aria-label="Next photo">›</button>
+      
+      <!-- Photo Display -->
+      <div class="modal-photo-container">
+        <img [src]="selectedPhoto.src" [alt]="selectedPhoto.title" class="modal-photo">
+      </div>
+      
+      <!-- Photo Details -->
+      <div class="modal-details">
+        <div class="modal-header">
+          <h2 class="modal-title">{{ selectedPhoto.title }}</h2>
+          <p class="modal-location">📍 {{ selectedPhoto.location }}</p>
+        </div>
+        
+        <p class="modal-description">{{ selectedPhoto.description }}</p>
+        
+        <div class="modal-meta">
+          <div class="modal-tags">
+            <span *ngFor="let tag of selectedPhoto.tags" class="modal-tag">#{{ tag }}</span>
+          </div>
+          <div class="modal-date">{{ formatDate(selectedPhoto.date) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
